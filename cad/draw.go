@@ -36,19 +36,6 @@ type Canvas struct {
 func (p Point) Line(x float64, y float64) Point {
 	to := Point{p.x + x, p.y + y}
 	line := Line{p, to}
-	addDrawable(line)
+	append(drawElements, line)
 	return to
-}
-
-func addDrawable(d Drawable) {
-	m := len(drawElements)
-	n := m + 1
-	if n > cap(drawElements) {
-		// allocate double what's needed, for future growth.
-		newSlice := make([]Drawable, (n+1)*2)
-		copy(newSlice, drawElements)
-		drawElements = newSlice
-	}
-	drawElements = drawElements[0:n]
-	drawElements[m] = d;
 }
